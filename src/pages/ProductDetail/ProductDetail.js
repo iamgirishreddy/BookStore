@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Button, Badge, Alert } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
 import { books } from '../../data/books';
+import ProductCard from '../../components/ProductCard/ProductCard';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 
@@ -82,10 +83,28 @@ const ProductDetail = () => {
               justifyContent: 'center',
               border: '1px solid #dee2e6',
               borderRadius: '8px',
-              margin: '0 auto'
+              margin: '0 auto',
+              padding: '16px',
+              overflow: 'hidden'
             }}
           >
-            <span style={{ fontSize: '4rem' }}>📖</span>
+            {book.image ? (
+              <img
+                src={book.image}
+                alt={book.title}
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  objectFit: 'contain'
+                }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64"%3E%3Crect width="100%25" height="100%25" fill="%23f8f9fa"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="%23495057"%3E📚%3C/text%3E%3C/svg%3E';
+                }}
+              />
+            ) : (
+              <span style={{ fontSize: '4rem' }}>📚</span>
+            )}
           </div>
         </Col>
         
@@ -163,47 +182,16 @@ const ProductDetail = () => {
       </Row>
       
       {relatedBooks.length > 0 && (
-        <Row className="mt-5">
-          <Col>
-            <h3 className="mb-4">You might also like</h3>
-            <Row>
-              {relatedBooks.map(relatedBook => (
-                <Col md={4} key={relatedBook.id} className="mb-3">
-                  <div className="border rounded p-3 h-100">
-                    <div className="text-center mb-2">
-                      <div 
-                        style={{
-                          width: '100px',
-                          height: '130px',
-                          backgroundColor: '#f8f9fa',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          margin: '0 auto',
-                          border: '1px solid #dee2e6'
-                        }}
-                      >
-                        📖
-                      </div>
-                    </div>
-                    <h6>{relatedBook.title}</h6>
-                    <p className="text-muted small">by {relatedBook.author}</p>
-                    <p className="text-success mb-2">₹{relatedBook.price}</p>
-                    <Button 
-                      as={Link} 
-                      to={`/product/${relatedBook.id}`}
-                      variant="outline-primary" 
-                      size="sm"
-                      className="w-100"
-                    >
-                      View Details
-                    </Button>
-                  </div>
-                </Col>
-              ))}
-            </Row>
-          </Col>
-        </Row>
+        <div className="mt-5">
+          <h3 className="mb-4">You might also like</h3>
+          <Row>
+            {relatedBooks.map(relatedBook => (
+              <Col md={4} key={relatedBook.id} className="mb-3">
+                <ProductCard book={relatedBook} />
+              </Col>
+            ))}
+          </Row>
+        </div>
       )}
     </Container>
   );

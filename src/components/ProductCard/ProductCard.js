@@ -42,21 +42,49 @@ const ProductCard = ({ book }) => {
         </Button>
         
         <div className="text-center pt-3">
-          <div 
+          <Link
+            to={`/product/${book.id}`}
+            className="text-decoration-none"
             style={{
               width: '150px',
               height: '200px',
-              backgroundColor: '#f8f9fa',
               margin: '0 auto',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '1px solid #dee2e6',
-              borderRadius: '4px'
+              display: 'block'
             }}
           >
-            📖
-          </div>
+            <div 
+              style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#f8f9fa',
+                border: '1px solid #dee2e6',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                padding: '8px'
+              }}
+            >
+              {book.image ? (
+                <img
+                  src={book.image}
+                  alt={book.title}
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    objectFit: 'contain'
+                  }}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64"%3E%3Crect width="100%25" height="100%25" fill="%23f8f9fa"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="%23495057"%3E📚%3C/text%3E%3C/svg%3E';
+                  }}
+                />
+              ) : (
+                <span role="img" aria-label="book" style={{ fontSize: '2rem' }}>📚</span>
+              )}
+            </div>
+          </Link>
         </div>
         
         <Card.Body>

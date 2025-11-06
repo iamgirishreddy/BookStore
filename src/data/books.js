@@ -8,6 +8,7 @@ export const books = [
     originalPrice: 599,
     rating: 4.5,
     reviewCount: 1247,
+    image: "https://books.google.com/books/content?id=besjEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
     description: "A classic American novel set in the summer of 1922, following the mysterious Jay Gatsby and his pursuit of the American Dream.",
     inStock: true,
     featured: true
@@ -21,6 +22,7 @@ export const books = [
     originalPrice: 650,
     rating: 4.8,
     reviewCount: 2156,
+    image: "https://books.google.com/books/content?id=ko9UrgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     description: "A gripping tale of racial injustice and childhood innocence in the American South during the 1930s.",
     inStock: true,
     featured: true
@@ -34,6 +36,7 @@ export const books = [
     originalPrice: 699,
     rating: 4.7,
     reviewCount: 3421,
+    image: "https://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
     description: "A dystopian social science fiction novel about totalitarian control and surveillance.",
     inStock: true,
     featured: true
@@ -47,6 +50,7 @@ export const books = [
     originalPrice: 549,
     rating: 4.2,
     reviewCount: 1876,
+    image: "https://covers.openlibrary.org/b/id/8398219-M.jpg",
     description: "A controversial coming-of-age story narrated by the cynical teenager Holden Caulfield.",
     inStock: true,
     featured: false
@@ -60,6 +64,7 @@ export const books = [
     originalPrice: 799,
     rating: 4.6,
     reviewCount: 2987,
+    image: "https://covers.openlibrary.org/b/id/7715948-M.jpg",
     description: "An epic science fiction novel set in the distant future amidst a feudal interstellar society.",
     inStock: true,
     featured: true
@@ -73,6 +78,7 @@ export const books = [
     originalPrice: 649,
     rating: 4.9,
     reviewCount: 4563,
+    image: "https://covers.openlibrary.org/b/id/8429816-M.jpg",
     description: "A fantasy adventure following Bilbo Baggins on his unexpected journey to the Lonely Mountain.",
     inStock: true,
     featured: true
@@ -86,6 +92,7 @@ export const books = [
     originalPrice: 749,
     rating: 4.4,
     reviewCount: 1532,
+    image: "https://covers.openlibrary.org/b/id/8423897-M.jpg",
     description: "A landmark book about cosmology, exploring the nature of time and the universe.",
     inStock: true,
     featured: false
@@ -99,6 +106,7 @@ export const books = [
     originalPrice: 499,
     rating: 4.3,
     reviewCount: 2211,
+    image: "https://covers.openlibrary.org/b/id/8369573-M.jpg",
     description: "An ancient Chinese military treatise on strategy and tactics, applicable to many areas of life.",
     inStock: true,
     featured: false
@@ -112,6 +120,7 @@ export const books = [
     originalPrice: 899,
     rating: 4.7,
     reviewCount: 5431,
+    image: "https://covers.openlibrary.org/b/id/8423825-M.jpg",
     description: "A fascinating exploration of how Homo sapiens came to dominate the world.",
     inStock: true,
     featured: true
@@ -125,6 +134,7 @@ export const books = [
     originalPrice: 999,
     rating: 4.1,
     reviewCount: 1876,
+    image: "https://covers.openlibrary.org/b/id/8383563-M.jpg",
     description: "A methodology for developing businesses and products through validated learning.",
     inStock: true,
     featured: false
@@ -138,6 +148,7 @@ export const books = [
     originalPrice: 699,
     rating: 4.9,
     reviewCount: 8765,
+    image: "https://covers.openlibrary.org/b/id/8398212-M.jpg",
     description: "The magical beginning of Harry Potter's journey at Hogwarts School of Witchcraft and Wizardry.",
     inStock: true,
     featured: true
@@ -151,6 +162,7 @@ export const books = [
     originalPrice: 499,
     rating: 4.3,
     reviewCount: 3421,
+    image: "https://covers.openlibrary.org/b/id/8412844-M.jpg",
     description: "A philosophical book about following your dreams and listening to your heart.",
     inStock: false,
     featured: false
@@ -164,6 +176,7 @@ export const books = [
     originalPrice: 599,
     rating: 4.6,
     reviewCount: 2134,
+    image: "https://covers.openlibrary.org/b/id/8421563-M.jpg",
     description: "A story about the childhood experiences of fraternal twins whose lives are destroyed by social conventions.",
     inStock: true,
     featured: true
@@ -177,6 +190,7 @@ export const books = [
     originalPrice: 549,
     rating: 4.4,
     reviewCount: 1987,
+    image: "https://covers.openlibrary.org/b/id/8421564-M.jpg",
     description: "A darkly humorous perspective on India's class struggle told through the eyes of a village boy.",
     inStock: true,
     featured: false
@@ -190,6 +204,7 @@ export const books = [
     originalPrice: 699,
     rating: 4.5,
     reviewCount: 2543,
+    image: "https://covers.openlibrary.org/b/id/8421565-M.jpg",
     description: "A magical realist epic that intertwines the fate of India with personal destinies.",
     inStock: true,
     featured: true
@@ -203,6 +218,7 @@ export const books = [
     originalPrice: 499,
     rating: 4.3,
     reviewCount: 5678,
+    image: "https://covers.openlibrary.org/b/id/8421566-M.jpg",
     description: "The first book of the Shiva Trilogy reimagining the legend of Lord Shiva as a mortal hero.",
     inStock: true,
     featured: true
@@ -216,6 +232,7 @@ export const books = [
     originalPrice: 525,
     rating: 4.6,
     reviewCount: 1876,
+    image: "https://covers.openlibrary.org/b/id/8421567-M.jpg",
     description: "A powerful novel about the partition of India and its impact on a small village.",
     inStock: true,
     featured: false
@@ -229,6 +246,7 @@ export const books = [
     originalPrice: 449,
     rating: 4.8,
     reviewCount: 9876,
+    image: "https://covers.openlibrary.org/b/id/8421568-M.jpg",
     description: "An autobiography of India's Missile Man and former President APJ Abdul Kalam.",
     inStock: true,
     featured: true
@@ -242,6 +260,7 @@ export const books = [
     originalPrice: 475,
     rating: 4.7,
     reviewCount: 4321,
+    image: "https://covers.openlibrary.org/b/id/8421569-M.jpg",
     description: "Gandhi's autobiography chronicling his spiritual and moral experiments.",
     inStock: true,
     featured: false
@@ -255,6 +274,7 @@ export const books = [
     originalPrice: 599,
     rating: 4.5,
     reviewCount: 3456,
+    image: "https://covers.openlibrary.org/b/id/8421570-M.jpg",
     description: "The Mahabharata retold from Draupadi's perspective with vivid imagination.",
     inStock: true,
     featured: true
@@ -268,6 +288,7 @@ export const books = [
     originalPrice: 1099,
     rating: 4.4,
     reviewCount: 2187,
+    image: "https://covers.openlibrary.org/b/id/8421571-M.jpg",
     description: "An epic tale set in post-independence India following four families.",
     inStock: true,
     featured: false
@@ -281,6 +302,7 @@ export const books = [
     originalPrice: 549,
     rating: 4.3,
     reviewCount: 2876,
+    image: "https://covers.openlibrary.org/b/id/8421572-M.jpg",
     description: "A story about the struggles of identity and belonging in immigrant families.",
     inStock: true,
     featured: false
@@ -294,6 +316,7 @@ export const books = [
     originalPrice: 549,
     rating: 4.6,
     reviewCount: 4567,
+    image: "https://covers.openlibrary.org/b/id/8421573-M.jpg",
     description: "The second book in the Ram Chandra series telling Sita's story.",
     inStock: true,
     featured: true
@@ -307,6 +330,7 @@ export const books = [
     originalPrice: 999,
     rating: 4.7,
     reviewCount: 3214,
+    image: "https://covers.openlibrary.org/b/id/8421574-M.jpg",
     description: "A comprehensive history of independent India from 1947 onwards.",
     inStock: true,
     featured: false
@@ -314,13 +338,53 @@ export const books = [
 ];
 
 export const categories = [
-  { name: "fiction", displayName: "Fiction", count: 9 },
-  { name: "science-fiction", displayName: "Science Fiction", count: 2 },
-  { name: "fantasy", displayName: "Fantasy", count: 2 },
-  { name: "science", displayName: "Science", count: 1 },
-  { name: "philosophy", displayName: "Philosophy", count: 1 },
-  { name: "history", displayName: "History", count: 3 },
-  { name: "business", displayName: "Business", count: 1 },
-  { name: "mythology", displayName: "Mythology", count: 3 },
-  { name: "biography", displayName: "Biography", count: 2 }
+  { 
+    name: "fiction", 
+    displayName: "Fiction", 
+    count: 9
+  },
+  { 
+    name: "science-fiction", 
+    displayName: "Science Fiction", 
+    count: 2
+  },
+  { 
+    name: "fantasy", 
+    displayName: "Fantasy", 
+    count: 2
+  },
+  { 
+    name: "science", 
+    displayName: "Science", 
+    count: 1
+  },
+  { 
+    name: "philosophy", 
+    displayName: "Philosophy", 
+    count: 1
+  },
+  { 
+    name: "history", 
+    displayName: "History", 
+    count: 3,
+    image: "https://images.unsplash.com/photo-1506880018600-83d5b814b5a6?w=500&h=300&fit=crop"
+  },
+  { 
+    name: "business", 
+    displayName: "Business", 
+    count: 1,
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=300&fit=crop"
+  },
+  { 
+    name: "mythology", 
+    displayName: "Mythology", 
+    count: 3,
+    image: "https://images.unsplash.com/photo-1594787318286-3d835c1cab83?w=500&h=300&fit=crop"
+  },
+  { 
+    name: "biography", 
+    displayName: "Biography", 
+    count: 2,
+    image: "https://images.unsplash.com/photo-1507842217343-583f20270319?w=500&h=300&fit=crop"
+  }
 ];
