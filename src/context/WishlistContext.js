@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const WishlistContext = createContext();
+const WISHLIST_STORAGE_KEY = 'bookstore_wishlist';
 
 export const useWishlist = () => {
   const context = useContext(WishlistContext);
@@ -11,7 +12,19 @@ export const useWishlist = () => {
 };
 
 export const WishlistProvider = ({ children }) => {
-  const [wishlistItems, setWishlistItems] = useState([]);
+  const [wishlistItems, setWishlistItems] = useState(() => {
+    try {
+      const savedWishlist = localStorage.getItem(WISHLIST_STORAGE_KEY);
+      return savedWishlist ? JSON.parse(savedWishlist) : [];
+    } catch (error) {
+      console.error('Error loading wishlist from localStorage:', error);
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(wishlistItems));
+  }, [wishlistItems]);
   
   const addToWishlist = (book) => {
     setWishlistItems(prevItems => {
