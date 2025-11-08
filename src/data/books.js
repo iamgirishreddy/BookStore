@@ -9,7 +9,7 @@ export const books = [
     rating: 4.5,
     reviewCount: 1247,
     image: "https://books.google.com/books/content?id=besjEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-    description: "A classic American novel set in the summer of 1922, following the mysterious Jay Gatsby and his pursuit of the American Dream.",
+  description: "A classic American novel set in the summer of 1922, following the mysterious Jay Gatsby and his pursuit of the American Dream. The story explores themes of wealth, love, and the American Dream, set against the backdrop of the Roaring Twenties. Fitzgerald's lyrical prose and memorable characters make this a timeless tale of ambition and tragedy.",
     inStock: true,
     featured: true
   },
@@ -23,7 +23,7 @@ export const books = [
     rating: 4.8,
     reviewCount: 2156,
     image: "https://books.google.com/books/content?id=ko9UrgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    description: "A gripping tale of racial injustice and childhood innocence in the American South during the 1930s.",
+  description: "A gripping tale of racial injustice and childhood innocence in the American South during the 1930s. Through the eyes of young Scout Finch, the novel explores themes of empathy, morality, and the complexities of human nature. Harper Lee's masterpiece remains a powerful commentary on justice and compassion.",
     inStock: true,
     featured: true
   },
@@ -37,7 +37,7 @@ export const books = [
     rating: 4.7,
     reviewCount: 3421,
     image: "https://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-    description: "A dystopian social science fiction novel about totalitarian control and surveillance.",
+  description: "A dystopian social science fiction novel about totalitarian control and surveillance. George Orwell's chilling vision of a future society under constant watch challenges readers to consider the dangers of unchecked power and the loss of personal freedom. '1984' is a profound warning and a literary classic.",
     inStock: true,
     featured: true
   },
@@ -51,7 +51,7 @@ export const books = [
     rating: 4.2,
     reviewCount: 1876,
     image: "https://covers.openlibrary.org/b/id/8398219-M.jpg",
-    description: "A controversial coming-of-age story narrated by the cynical teenager Holden Caulfield.",
+  description: "A controversial coming-of-age story narrated by the cynical teenager Holden Caulfield. Salinger's novel captures the alienation and confusion of adolescence, as Holden navigates the complexities of adulthood, identity, and belonging in postwar America. The book's raw honesty and unique voice have made it a cultural touchstone.",
     inStock: true,
     featured: false
   },
@@ -65,7 +65,7 @@ export const books = [
     rating: 4.6,
     reviewCount: 2987,
     image: "https://covers.openlibrary.org/b/id/7715948-M.jpg",
-    description: "An epic science fiction novel set in the distant future amidst a feudal interstellar society.",
+  description: "An epic science fiction novel set in the distant future amidst a feudal interstellar society. Frank Herbert's 'Dune' is a sweeping saga of politics, religion, and ecology, centered on the desert planet Arrakis and its valuable spice. The novel's intricate world-building and philosophical depth have influenced generations of readers and writers.",
     inStock: true,
     featured: true
   },
@@ -79,7 +79,7 @@ export const books = [
     rating: 4.9,
     reviewCount: 4563,
     image: "https://covers.openlibrary.org/b/id/8429816-M.jpg",
-    description: "A fantasy adventure following Bilbo Baggins on his unexpected journey to the Lonely Mountain.",
+  description: "A fantasy adventure following Bilbo Baggins on his unexpected journey to the Lonely Mountain. Tolkien's beloved tale introduces readers to Middle-earth, where courage, friendship, and cleverness triumph over adversity. 'The Hobbit' is a timeless story of growth and discovery, filled with memorable characters and magical landscapes.",
     inStock: true,
     featured: true
   },
@@ -93,7 +93,7 @@ export const books = [
     rating: 4.4,
     reviewCount: 1532,
     image: "https://covers.openlibrary.org/b/id/8423897-M.jpg",
-    description: "A landmark book about cosmology, exploring the nature of time and the universe.",
+  description: "A landmark book about cosmology, exploring the nature of time and the universe. Stephen Hawking makes complex scientific concepts accessible, guiding readers through black holes, the Big Bang, and the mysteries of space-time. This groundbreaking work inspires curiosity and wonder about our place in the cosmos.",
     inStock: true,
     featured: false
   },

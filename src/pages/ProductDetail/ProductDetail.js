@@ -57,7 +57,7 @@ const ProductDetail = () => {
     .slice(0, 3);
   
   return (
-    <Container className="py-4">
+  <Container className="py-4">
       {showAlert && (
         <Alert 
           variant={alertVariant} 
@@ -116,8 +116,8 @@ const ProductDetail = () => {
             {!book.inStock && <Badge bg="danger">Out of Stock</Badge>}
           </div>
           
-          <h1 className="mb-3">{book.title}</h1>
-          <h5 className="text-muted mb-3">by {book.author}</h5>
+          <h5 className="mb-2 fw-bold">{book.title}</h5>
+          <div className="text-muted mb-3">by {book.author}</div>
           
           <div className="d-flex align-items-center mb-3">
             <span className="text-warning me-2">★★★★★</span>
@@ -144,11 +144,11 @@ const ProductDetail = () => {
           <div className="d-flex flex-wrap gap-3 mb-4">
             <Button 
               variant="success" 
-              size="lg"
+              size="sm"
               onClick={handleAddToCart}
               disabled={!book.inStock}
-              className="flex-grow-1"
-              style={{ minWidth: '200px' }}
+              className="flex-grow-1 px-4 py-2"
+              style={{ minWidth: '160px', fontSize: '1rem' }}
             >
               {book.inStock ? (
                 <>🛒 Add to Cart</>
@@ -156,12 +156,12 @@ const ProductDetail = () => {
                 'Out of Stock'
               )}
             </Button>
-            
             <Button 
               variant={isInWishlist(book.id) ? "danger" : "outline-danger"}
-              size="lg"
+              size="sm"
               onClick={handleWishlistToggle}
-              style={{ minWidth: '150px' }}
+              className="px-4 py-2"
+              style={{ minWidth: '140px', fontSize: '1rem' }}
             >
               {isInWishlist(book.id) ? (
                 <>❤️ In Wishlist</>
