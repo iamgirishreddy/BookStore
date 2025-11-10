@@ -215,7 +215,8 @@ const Checkout = () => {
         </Col>
 
         <Col lg={4}>
-          <Card className="sticky-top" style={{ top: '20px' }}>
+          <Card className="sticky-top" style={{ top: '20px', zIndex: 1020 }}>
+
             <Card.Header>
               <h5 className="mb-0">Order Summary</h5>
             </Card.Header>
