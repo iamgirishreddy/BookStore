@@ -151,7 +151,8 @@ const ProductCard = ({ book }) => {
         </Card.Footer>
       </Card>
       
-      <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 11 }}>
+      {/* <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 11 }}> */}
+      <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 1021 }}>
         <Toast 
           show={showToast} 
           onClose={() => setShowToast(false)}

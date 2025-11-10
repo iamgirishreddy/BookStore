@@ -131,7 +131,7 @@ const Cart = () => {
             </Card.Body>
             <Card.Footer>
               <div className="d-grid">
-                <Button variant="success" size="lg">
+                <Button variant="success" size="lg" as={Link} to="/checkout">
                   Proceed to Checkout
                 </Button>
               </div>
