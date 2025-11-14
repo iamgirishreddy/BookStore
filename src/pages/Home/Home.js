@@ -4,8 +4,18 @@ import { Link } from 'react-router-dom';
 import { books, categories } from '../../data/books';
 import ProductCard from '../../components/ProductCard/ProductCard';
 
-// You can change this URL to update all category images at once
-const CATEGORY_HERO_IMAGE = "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=500&h=300&q=80";
+
+const CATEGORY_IMAGES = {
+  fiction: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=400&fit=crop&q=80",
+  'science-fiction': "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&q=80",
+  fantasy: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop&q=80",
+  science: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop&q=80",
+  philosophy: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&h=400&fit=crop&q=80",
+  history: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=600&h=400&fit=crop&q=80",
+  business: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&q=80",
+  mythology: "https://images.unsplash.com/photo-1594787318286-3d835c1cab83?w=600&h=400&fit=crop&q=80",
+  biography: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop&q=80"
+};
 
 const Home = () => {
   const featuredBooks = books.filter(book => book.featured);
@@ -42,7 +52,7 @@ const Home = () => {
                         height: '160px',
                         overflow: 'hidden',
                         position: 'relative',
-                        backgroundImage: `url("${CATEGORY_HERO_IMAGE}")`,
+                        backgroundImage: `url("${CATEGORY_IMAGES[category.name] || CATEGORY_IMAGES.fiction}")`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundColor: '#f8f9fa' // Fallback color while image loads
