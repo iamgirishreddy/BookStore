@@ -13,7 +13,7 @@ const CATEGORY_IMAGES = {
   philosophy: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&h=400&fit=crop&q=80",
   history: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=600&h=400&fit=crop&q=80",
   business: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&q=80",
-  mythology: "https://images.unsplash.com/photo-1594787318286-3d835c1cab83?w=600&h=400&fit=crop&q=80",
+  mythology: "https://images.unsplash.com/photo-1546778316-dfda79f1c84e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   biography: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop&q=80"
 };
 
