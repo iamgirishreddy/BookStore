@@ -2,9 +2,23 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button, ListGroup, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { useOrder } from '../../context/OrderContext';
+
+const presetAddress = {
+  name: 'Rahul Sharma',
+  email: 'rahul.sharma@email.com',
+  phone: '9876543210',
+  address: '123 MG Road, Bangalore',
+  city: 'Bangalore',
+  state: 'Karnataka',
+  pincode: '560001',
+  paymentMethod: 'cod'
+};
+
 
 const Checkout = () => {
   const { cartItems, getTotalPrice, clearCart } = useCart();
+  const { addOrder } = useOrder();
   const navigate = useNavigate();
   const [orderPlaced, setOrderPlaced] = useState(false);
   
@@ -19,6 +33,10 @@ const Checkout = () => {
     paymentMethod: 'cod'
   });
 
+    const handleAddAddress = () => {
+    setFormData(presetAddress);
+  };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -28,6 +46,18 @@ const Checkout = () => {
 
   const handlePlaceOrder = (e) => {
     e.preventDefault();
+
+   const order = {
+      id: `ORD-${Date.now()}`, 
+      date: new Date().toLocaleDateString(),
+      total: getTotalPrice(),
+      status: 'Shipped',
+      items: cartItems.map(i => i.title),
+      address: { ...formData }
+    };
+
+    addOrder(order);
+
     setOrderPlaced(true);
     setTimeout(() => {
       clearCart();
@@ -67,8 +97,12 @@ const Checkout = () => {
       <Row>
         <Col lg={8}>
           <Card className="mb-4">
+            
             <Card.Header>
               <h5 className="mb-0">Delivery Address</h5>
+              <Button variant="outline-primary" size="sm" onClick={handleAddAddress}>
+                Add Address
+              </Button>
             </Card.Header>
             <Card.Body>
               <Form onSubmit={handlePlaceOrder}>

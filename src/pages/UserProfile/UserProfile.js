@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import {useOrder} from '../../context/OrderContext';
 
 const UserProfile = () => {
   const [user] = useState({
@@ -24,22 +25,9 @@ const UserProfile = () => {
     }
   ]);
   
-  const [orders] = useState([
-    {
-      id: "ORD-001",
-      date: "2024-10-15",
-      total: 1248,
-      status: "Delivered",
-      items: ["The God of Small Things", "Midnight's Children"]
-    },
-    {
-      id: "ORD-002", 
-      date: "2024-10-10",
-      total: 749,
-      status: "Shipped",
-      items: ["Wings of Fire"]
-    }
-  ]);
+  
+  
+  const {orders} = useOrder();
   
   return (
     <Container className="py-4">
@@ -92,25 +80,29 @@ const UserProfile = () => {
               <h5 className="mb-0">Order History</h5>
             </Card.Header>
             <Card.Body>
-              {orders.map(order => (
-                <div key={order.id} className="border rounded p-3 mb-3">
-                  <div className="d-flex justify-content-between align-items-start mb-2">
-                    <div>
-                      <h6 className="mb-1">Order {order.id}</h6>
-                      <p className="text-muted small mb-1">Placed on {order.date}</p>
-                    </div>
-                    <div className="text-end">
-                      <p className="h6 text-success mb-1">₹{order.total}</p>
-                      <span className={`badge ${order.status === 'Delivered' ? 'bg-success' : 'bg-warning'}`}>
-                        {order.status}
-                      </span>
+              {orders.length === 0 ? (
+                <p className="text-muted">No orders yet.</p>
+              ) : (
+                orders.map(order => (
+                  <div key={order.id} className="border rounded p-3 mb-3">
+                    <div className="d-flex justify-content-between align-items-start mb-2">
+                      <div>
+                        <h6 className="mb-1">Order {order.id}</h6>
+                        <p className="text-muted small mb-1">Placed on {order.date}</p>
+                        <p className="small text-muted mb-0">
+                          Items: {order.items.join(', ')}
+                        </p>
+                      </div>
+                      <div className="text-end">
+                        <p className="h6 text-success mb-1">₹{order.total}</p>
+                        <span className={`badge ${order.status === 'Delivered' ? 'bg-success' : 'bg-warning'}`}>
+                          {order.status}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <p className="small text-muted mb-0">
-                    Items: {order.items.join(', ')}
-                  </p>
-                </div>
-              ))}
+                ))
+              )}
             </Card.Body>
           </Card>
         </Col>

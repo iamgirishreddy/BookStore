@@ -11,12 +11,14 @@ import Cart from './pages/Cart/Cart';
 import Wishlist from './pages/Wishlist/Wishlist';
 import UserProfile from './pages/UserProfile/UserProfile';
 import Checkout from './pages/Checkout/Checkout';
+import {OrderProvider} from './context/OrderContext';
 
 
 
 
 function App() {
   return (
+    <OrderProvider>
     <CartProvider>
       <WishlistProvider>
         <Router>
@@ -37,6 +39,7 @@ function App() {
         </Router>
       </WishlistProvider>
     </CartProvider>
+    </OrderProvider>
   );
 }
 
