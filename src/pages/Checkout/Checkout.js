@@ -44,26 +44,37 @@ const Checkout = () => {
     });
   };
 
-  const handlePlaceOrder = (e) => {
+  const handlePlaceOrder = async (e) => {
     e.preventDefault();
 
-   const order = {
-      id: `ORD-${Date.now()}`, 
-      date: new Date().toLocaleDateString(),
-      total: getTotalPrice(),
-      status: 'Shipped',
-      items: cartItems.map(i => i.title),
-      address: { ...formData }
-    };
-
-    addOrder(order);
-
+   const orderData = {
+    items: cartItems.map(item => ({
+      product: item.product._id,
+      title: item.product.title,
+      price: item.product.price,
+      quantity: item.quantity
+    })),
+    shippingAddress: {
+      name: formData.name,
+      address: formData.address,
+      city: formData.city,
+      state: formData.state,
+      pincode: formData.pincode,
+      phone: formData.phone
+    },
+    paymentMethod: formData.paymentMethod,
+    totalAmount: getTotalPrice()
+  };
+    const order = await addOrder(orderData);
+if (order) {
     setOrderPlaced(true);
     setTimeout(() => {
       clearCart();
       navigate('/profile');
     }, 3000);
-  };
+  }
+};
+  
 
   if (cartItems.length === 0 && !orderPlaced) {
     return (

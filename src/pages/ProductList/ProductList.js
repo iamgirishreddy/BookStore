@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import API from '../../api/axios';
 import { Container, Row, Col, Form, Button, Card, Badge } from 'react-bootstrap';
 import { useParams, useLocation } from 'react-router-dom';
-import { books, categories } from '../../data/books';
+// import { books, categories } from '../../data/books';
 import ProductCard from '../../components/ProductCard/ProductCard';
 
 const ProductList = () => {
@@ -9,6 +10,11 @@ const ProductList = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get('search') || '';
+  const [books, setBooks] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
   
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState(category ? [category] : []);
@@ -17,33 +23,25 @@ const ProductList = () => {
   const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
   
   useEffect(() => {
-    let result = [...books];
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        
+        const [productsRes, categoriesRes] = await Promise.all([
+          API.get('/products'),
+          API.get('/categories')
+        ]);
+        setBooks(productsRes.data.data.products);
+        setCategories(categoriesRes.data.data.categories);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
     
-    if (localSearchQuery.trim()) {
-      const query = localSearchQuery.toLowerCase();
-      result = result.filter(book => 
-        book.title.toLowerCase().includes(query) ||
-        book.author.toLowerCase().includes(query)
-      );
-    }
-    
-    if (selectedCategories.length > 0) {
-      result = result.filter(book => selectedCategories.includes(book.category));
-    }
-    
-    if (minRating > 0) {
-      result = result.filter(book => book.rating >= minRating);
-    }
-    
-    result.sort((a, b) => {
-      if (sortBy === 'price-low') return a.price - b.price;
-      if (sortBy === 'price-high') return b.price - a.price;
-      if (sortBy === 'rating') return b.rating - a.rating;
-      return a.title.localeCompare(b.title);
-    });
-    
-    setFilteredBooks(result);
-  }, [selectedCategories, minRating, sortBy, localSearchQuery]);
   
   useEffect(() => {
     if (category) {
@@ -71,7 +69,14 @@ const ProductList = () => {
     setSortBy('name');
     setLocalSearchQuery('');
   };
-  
+  if (loading) {
+  return (
+    <Container className="py-5 text-center">
+      <h3>Loading products...</h3>
+    </Container>
+  );
+}
+
   return (
     <Container className="py-4">
       <Row>

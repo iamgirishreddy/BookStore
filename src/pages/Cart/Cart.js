@@ -41,7 +41,7 @@ const Cart = () => {
           <Card>
             <ListGroup variant="flush">
               {cartItems.map(item => (
-                <ListGroup.Item key={item.id} className="p-3">
+               <ListGroup.Item key={item.product._id} className="p-3">
                   <Row className="align-items-center">
                     <Col xs={3} md={2}>
                       <div 
@@ -56,14 +56,24 @@ const Cart = () => {
                           borderRadius: '4px'
                         }}
                       >
-                        📖
+                        <img 
+  src={item.product.image}
+  alt={item.product.title}
+  style={{
+    width: '80px',
+    height: '100px',
+    objectFit: 'cover',
+    borderRadius: '4px',
+    border: '1px solid #dee2e6'
+  }}
+/>
                       </div>
                     </Col>
                     
                     <Col xs={9} md={4}>
-                      <h6 className="mb-1">{item.title}</h6>
-                      <p className="text-muted small mb-1">by {item.author}</p>
-                      <p className="text-success mb-0">₹{item.price}</p>
+                      <h6 className="mb-1">{item.product.title}</h6>
+                      <p className="text-muted small mb-1">by {item.product.author}</p>
+                      <p className="text-success mb-0">₹{item.product.price}</p>
                     </Col>
                     
                     <Col xs={6} md={3}>
@@ -71,7 +81,7 @@ const Cart = () => {
                         <Button 
                           variant="outline-secondary" 
                           size="sm"
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.product._id, item.quantity - 1)}
                           disabled={item.quantity <= 1}
                         >
                           -
@@ -80,7 +90,7 @@ const Cart = () => {
                         <Button 
                           variant="outline-secondary" 
                           size="sm"
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.product._id, item.quantity + 1)}
                         >
                           +
                         </Button>
@@ -89,7 +99,7 @@ const Cart = () => {
                     
                     <Col xs={6} md={2}>
                       <p className="h6 text-success mb-0">
-                        ₹{item.price * item.quantity}
+                        ₹{item.product.price * item.quantity}
                       </p>
                     </Col>
                     
@@ -97,7 +107,7 @@ const Cart = () => {
                       <Button 
                         variant="outline-danger" 
                         size="sm"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeFromCart(item.product._id)}
                       >
                         ✕
                       </Button>

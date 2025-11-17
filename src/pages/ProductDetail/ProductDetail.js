@@ -1,31 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import API from '../../api/axios';
 import { Container, Row, Col, Button, Badge, Alert } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
-import { books } from '../../data/books';
+// import { books } from '../../data/books';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 
 const ProductDetail = () => {
   const { id } = useParams();
+  
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+    const [book, setBook] = useState(null);
+const [relatedBooks, setRelatedBooks] = useState([]);
+const [loading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertVariant, setAlertVariant] = useState('success');
   
-  const book = books.find(book => book.id === parseInt(id));
+useEffect(() => {
+  const fetchProduct = async () => {
+    try {
+      setLoading(true);
+      const { data } = await API.get(`/products/${id}`);
+      const product = data.data.product;
+      setBook(product);
+
+      const relatedRes = await API.get(`/products?category=${product.category}`);
+      const related = relatedRes.data.data.products
+        .filter(b => b._id !== id)
+        .slice(0, 3);
+      setRelatedBooks(related);
+    } catch (error) {
+      console.error('Error fetching product:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchProduct();
+}, [id]);
+
+if (loading) {
+  return (
+    <Container className="py-5 text-center">
+      <h3>Loading...</h3>
+    </Container>
+  );
+}
+
   
   if (!book) {
     return (
       <Container className="py-5">
-        <div className="text-center">
-          <h2>Book Not Found</h2>
-          <p className="text-muted mb-4">Sorry, the book you're looking for doesn't exist.</p>
-          <Button as={Link} to="/products" variant="primary">
-            Back to Books
-          </Button>
-        </div>
+       <h2>Book Not Found</h2>
+      <Button as={Link} to="/products" variant="primary">
+        Back to Books
+      </Button>
       </Container>
     );
   }
@@ -40,8 +72,9 @@ const ProductDetail = () => {
   };
   
   const handleWishlistToggle = () => {
-    if (isInWishlist(book.id)) {
-      removeFromWishlist(book.id);
+    const productId = book._id || book.id;
+    if (isInWishlist(productId)) {
+      removeFromWishlist(productId);
       setAlertMessage(`"${book.title}" removed from wishlist`);
       setAlertVariant('info');
     } else {
@@ -51,10 +84,6 @@ const ProductDetail = () => {
     }
     setShowAlert(true);
   };
-  
-  const relatedBooks = books
-    .filter(b => b.category === book.category && b.id !== book.id)
-    .slice(0, 3);
   
   return (
     <Container className="py-4">
@@ -158,7 +187,7 @@ const ProductDetail = () => {
             </Button>
             
             <Button 
-              variant={isInWishlist(book.id) ? "danger" : "outline-danger"}
+              variant={isInWishlist(productId) ? "danger" : "outline-danger"}
               size="lg"
               onClick={handleWishlistToggle}
               style={{ minWidth: '150px' }}

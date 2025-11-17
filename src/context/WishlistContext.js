@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import API from '../api/axios';
 
 const WishlistContext = createContext();
-const WISHLIST_STORAGE_KEY = 'bookstore_wishlist';
+
 
 export const useWishlist = () => {
   const context = useContext(WishlistContext);
@@ -12,36 +13,58 @@ export const useWishlist = () => {
 };
 
 export const WishlistProvider = ({ children }) => {
-  const [wishlistItems, setWishlistItems] = useState(() => {
-    try {
-      const savedWishlist = localStorage.getItem(WISHLIST_STORAGE_KEY);
-      return savedWishlist ? JSON.parse(savedWishlist) : [];
-    } catch (error) {
-      console.error('Error loading wishlist from localStorage:', error);
-      return [];
-    }
-  });
+  const [wishlistItems, setWishlistItems] = useState([]);
 
-  useEffect(() => {
-    localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(wishlistItems));
-  }, [wishlistItems]);
+    useEffect(() => {
+    fetchWishlist();
+  }, []);
+
+  const fetchWishlist = async () => {
+    try {
+      const { data } = await API.get('/wishlist');
+      setWishlistItems(data.data.wishlist.products || []);
+    } catch (error) {
+      console.error('Error fetching wishlist:', error);
+      setWishlistItems([]);
+    }
+  };
+
+
   
-  const addToWishlist = (book) => {
-    setWishlistItems(prevItems => {
-      const exists = prevItems.find(item => item.id === book.id);
-      if (!exists) {
-        return [...prevItems, book];
-      }
-      return prevItems;
-    });
+  const addToWishlist = async (book) => {
+    try {
+      const { data } = await API.post('/wishlist/add', {
+        productId: book._id || book.id
+      });
+      setWishlistItems(data.data.wishlist.products);
+    } catch (error) {
+      console.error('Error adding to wishlist:', error);
+      setWishlistItems(prev => {
+        const productId = book._id || book.id;
+        if (!prev.find(item => item._id === productId || item.id === productId)) {
+          return [...prev, book];
+        }
+        return prev;
+      });
+    }
   };
   
-  const removeFromWishlist = (bookId) => {
-    setWishlistItems(prevItems => prevItems.filter(item => item.id !== bookId));
+  const removeFromWishlist = async (bookId) => {
+    try {
+      const { data } = await API.delete(`/wishlist/remove/${bookId}`);
+      setWishlistItems(data.data.wishlist.products);
+    } catch (error) {
+      console.error('Error removing from wishlist:', error);
+      setWishlistItems(prev =>
+        prev.filter(item => item._id !== bookId && item.id !== bookId)
+      );
+    }
   };
   
-  const isInWishlist = (bookId) => {
-    return wishlistItems.some(item => item.id === bookId);
+  const isInWishlist = (bookId) =>{
+    return wishlistItems.some(
+      item => item._id === bookId || item.id === bookId
+    );
   };
   
   const value = {
