@@ -19,8 +19,8 @@ const ProductCard = ({ book }) => {
   
   const handleWishlistToggle = (e) => {
     e.preventDefault();
-    if (isInWishlist(book.id)) {
-      removeFromWishlist(book.id);
+    if (isInWishlist(book._id)) {
+      removeFromWishlist(book._id);
       setToastMessage(`"${book.title}" removed from wishlist`);
     } else {
       addToWishlist(book);
@@ -38,12 +38,12 @@ const ProductCard = ({ book }) => {
           onClick={handleWishlistToggle}
           style={{ zIndex: 1 }}
         >
-          {isInWishlist(book.id) ? '❤️' : '🤍'}
+          {isInWishlist(book._id) ? '❤️' : '🤍'}
         </Button>
         
         <div className="text-center pt-3">
           <Link
-            to={`/product/${book.id}`}
+            to={`/product/${book._id}`}
             className="text-decoration-none"
             style={{
               width: '150px',
@@ -141,7 +141,7 @@ const ProductCard = ({ book }) => {
             
             <Button
               as={Link}
-              to={`/product/${book.id}`}
+              to={`/product/${book._id}`}
               variant="outline-primary"
               size="sm"
             >

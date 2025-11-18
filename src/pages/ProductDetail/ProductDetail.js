@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import API from '../../api/axios';
 import { Container, Row, Col, Button, Badge, Alert } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
-// import { books } from '../../data/books';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
@@ -40,8 +39,9 @@ useEffect(() => {
       setLoading(false);
     }
   };
-
-  fetchProduct();
+ if (id) {  
+      fetchProduct();
+    }
 }, [id]);
 
 if (loading) {
@@ -74,7 +74,7 @@ if (loading) {
   };
   
   const handleWishlistToggle = () => {
-    const productId = book._id || book.id;
+    const productId = book._id || book._id;
     if (isInWishlist(productId)) {
       removeFromWishlist(productId);
       setAlertMessage(`"${book.title}" removed from wishlist`);
@@ -194,7 +194,7 @@ if (loading) {
               onClick={handleWishlistToggle}
               style={{ minWidth: '150px' }}
             >
-              {isInWishlist(book.id) ? (
+              {isInWishlist(productId) ? (
                 <>❤️ In Wishlist</>
               ) : (
                 <>🤍 Add to Wishlist</>
@@ -217,7 +217,7 @@ if (loading) {
           <h3 className="mb-4">You might also like</h3>
           <Row>
             {relatedBooks.map(relatedBook => (
-              <Col md={4} key={relatedBook.id} className="mb-3">
+              <Col md={4} key={relatedBook._id} className="mb-3">
                 <ProductCard book={relatedBook} />
               </Col>
             ))}

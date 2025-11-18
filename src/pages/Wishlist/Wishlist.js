@@ -10,7 +10,7 @@ const Wishlist = () => {
   
   const handleMoveToCart = (book) => {
     addToCart(book);
-    removeFromWishlist(book.id);
+    removeFromWishlist(book._id);
   };
   
   if (wishlistItems.length === 0) {
@@ -33,7 +33,7 @@ const Wishlist = () => {
       
       <Row>
         {wishlistItems.map(book => (
-          <Col lg={6} key={book.id} className="mb-3">
+          <Col lg={6} key={book._id} className="mb-3">
             <Card>
               <Card.Body>
                 <Row className="align-items-center">
@@ -49,7 +49,12 @@ const Wishlist = () => {
                         border: '1px solid #dee2e6'
                       }}
                     >
-                      📖
+                      <img 
+                        src={book.image} 
+                        alt={book.title} 
+
+                        style={{ maxWidth: '100%', maxHeight: '100%' }} 
+                      />
                     </div>
                   </Col>
                   <Col xs={9}>
@@ -68,13 +73,13 @@ const Wishlist = () => {
                       <Button 
                         variant="outline-danger" 
                         size="sm"
-                        onClick={() => removeFromWishlist(book.id)}
+                        onClick={() => removeFromWishlist(book._id)}
                       >
                         Remove
                       </Button>
                       <Button 
                         as={Link}
-                        to={`/product/${book.id}`}
+                        to={`/product/${book._id}`}
                         variant="outline-primary" 
                         size="sm"
                       >

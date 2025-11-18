@@ -84,10 +84,10 @@ const UserProfile = () => {
                 <p className="text-muted">No orders yet.</p>
               ) : (
                 orders.map(order => (
-                  <div key={order.id} className="border rounded p-3 mb-3">
+                  <div key={order._id} className="border rounded p-3 mb-3">
                     <div className="d-flex justify-content-between align-items-start mb-2">
                       <div>
-                        <h6 className="mb-1">Order {order.id}</h6>
+                        <h6 className="mb-1">Order {order._id}</h6>
                         <p className="text-muted small mb-1">Placed on {order.date}</p>
                         <p className="small text-muted mb-0">
                           Items: {order.items.join(', ')}
