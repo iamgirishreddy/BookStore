@@ -28,6 +28,20 @@ const UserProfile = () => {
   
   
   const {orders} = useOrder();
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-IN', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  };
+
+   const getOrderNumber = (id) => {
+    return `#${id.slice(-8).toUpperCase()}`;
+  };
+
+
   
   return (
     <Container className="py-4">
@@ -87,14 +101,20 @@ const UserProfile = () => {
                   <div key={order._id} className="border rounded p-3 mb-3">
                     <div className="d-flex justify-content-between align-items-start mb-2">
                       <div>
-                        <h6 className="mb-1">Order {order._id}</h6>
-                        <p className="text-muted small mb-1">Placed on {order.date}</p>
+                        <h6 className="mb-1">Order {getOrderNumber(order._id)}</h6>
+                        <p className="text-muted small mb-1">Placed on {formatDate(order.createdAt)}</p>
                         <p className="small text-muted mb-0">
-                          Items: {order.items.join(', ')}
+                         {order.items.length} item{order.items.length > 1 ? 's' : ''} • 
+  {order.items.map((item, index) => (
+    <span key={index}>
+      {item.product?.title || 'Product'} (×{item.quantity})
+      {index < order.items.length - 1 ? ', ' : ''}
+    </span>
+  ))}
                         </p>
                       </div>
                       <div className="text-end">
-                        <p className="h6 text-success mb-1">₹{order.total}</p>
+                        <p className="h6 text-success mb-1">₹{order.totalAmount}</p>
                         <span className={`badge ${order.status === 'Delivered' ? 'bg-success' : 'bg-warning'}`}>
                           {order.status}
                         </span>
