@@ -52,6 +52,42 @@ const ProductList = () => {
   useEffect(() => {
     setLocalSearchQuery(searchQuery);
   }, [searchQuery]);
+  useEffect(() => {
+    let result = books;
+    
+    if (selectedCategories.length > 0) {
+      result = result.filter(book => selectedCategories.includes(book.category));
+    }
+    
+
+    if (localSearchQuery) {
+      result = result.filter(book =>
+        book.title.toLowerCase().includes(localSearchQuery.toLowerCase()) ||
+        book.author.toLowerCase().includes(localSearchQuery.toLowerCase())
+      );
+    }
+    
+   
+    if (minRating > 0) {
+      result = result.filter(book => book.rating >= minRating);
+    }
+    
+
+    if (sortBy === 'price-low') {
+      result = [...result].sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'price-high') {
+      result = [...result].sort((a, b) => b.price - a.price);
+    } else if (sortBy === 'rating') {
+      result = [...result].sort((a, b) => b.rating - a.rating);
+    } else {
+      result = [...result].sort((a, b) => a.title.localeCompare(b.title));
+    }
+    
+    setFilteredBooks(result);
+  }, [books, selectedCategories, localSearchQuery, minRating, sortBy]);
+
+
+
   
   const handleCategoryChange = (categoryName) => {
     setSelectedCategories(prev => {
