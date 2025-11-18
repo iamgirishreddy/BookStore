@@ -1,4 +1,4 @@
-import React, { createContext, useContext, cartItems, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import API from '../api/axios';
 
 const CartContext = createContext();
@@ -14,15 +14,7 @@ export const useCart = () => {
 
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = cartItems(() => {
-    try {
-      const savedCart = localStorage.getItem(CART_STORAGE_KEY);
-      return savedCart ? JSON.parse(savedCart) : [];
-    } catch (error) {
-      console.error('Error loading cart from localStorage:', error);
-      return [];
-    }
-  });
+  const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
     useEffect(() => {

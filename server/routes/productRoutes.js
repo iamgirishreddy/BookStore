@@ -2,17 +2,19 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
 
-// GET all products
+
 router.get('/', async (req, res) => {
   try {
     const { category, search, minRating, sortBy } = req.query;
     
     let query = {};
     
+
     if (category) {
       query.category = category;
     }
     
+  
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: 'i' } },
@@ -20,17 +22,25 @@ router.get('/', async (req, res) => {
       ];
     }
     
+
     if (minRating) {
       query.rating = { $gte: parseFloat(minRating) };
     }
     
-    let sortOption = {};
-    if (sortBy === 'price-low') sortOption.price = 1;
-    else if (sortBy === 'price-high') sortOption.price = -1;
-    else if (sortBy === 'rating') sortOption.rating = -1;
-    else sortOption.title = 1;
+    let productsQuery = Product.find(query);
     
-    const products = await Product.find(query).sort(sortOption);
+ 
+    if (sortBy === 'price-low') {
+      productsQuery = productsQuery.sort({ price: 1 });
+    } else if (sortBy === 'price-high') {
+      productsQuery = productsQuery.sort({ price: -1 });
+    } else if (sortBy === 'rating') {
+      productsQuery = productsQuery.sort({ rating: -1 });
+    } else {
+      productsQuery = productsQuery.sort({ title: 1 });
+    }
+    
+    const products = await productsQuery;
     
     res.json({
       data: {

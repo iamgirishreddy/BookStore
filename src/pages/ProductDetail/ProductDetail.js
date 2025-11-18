@@ -18,6 +18,8 @@ const [loading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertVariant, setAlertVariant] = useState('success');
+
+  const productId = book?._id || book?.id;
   
 useEffect(() => {
   const fetchProduct = async () => {

@@ -4,19 +4,9 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 // import { books, categories } from '../../data/books';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import { CATEGORY_IMAGES } from '../../utils/categoryImages';
 
 
-// const CATEGORY_IMAGES = {
-//   fiction: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=400&fit=crop&q=80",
-//   'science-fiction': "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&q=80",
-//   fantasy: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop&q=80",
-//   science: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop&q=80",
-//   philosophy: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&h=400&fit=crop&q=80",
-//   history: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=600&h=400&fit=crop&q=80",
-//   business: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&q=80",
-//   mythology: "https://images.unsplash.com/photo-1546778316-dfda79f1c84e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//   biography: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop&q=80"
-// };
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -30,6 +20,11 @@ const Home = () => {
           API.get('/products'),
           API.get('/categories')
         ]);
+
+         console.log('Categories:', categoriesRes.data.data.categories); 
+      console.log('Products:', productsRes.data.data.products); 
+
+
         setBooks(productsRes.data.data.products);
         setCategories(categoriesRes.data.data.categories);
       } catch (error) {
@@ -77,8 +72,8 @@ const Home = () => {
           <Col>
             <h2 className="text-center mb-4">Shop by Category</h2>
             <Row>
-              {categories.map(category => (
-                <Col md={3} sm={6} key={category.name} className="mb-3">
+              {categories.map((category, index) => (
+  <Col md={3} sm={6} key={category.name || index} className="mb-3">
                   <Card className="h-100 shadow-sm category-card">
                     <div 
                       style={{
@@ -129,8 +124,8 @@ const Home = () => {
           <Col>
             <h2 className="text-center mb-4">Featured Books</h2>
             <Row>
-              {featuredBooks.slice(0, 8).map(book => (
-                <Col lg={3} md={6} key={book.id} className="mb-4">
+             {featuredBooks.slice(0, 8).map((book, index) => (
+  <Col lg={3} md={6} key={book._id || index} className="mb-4">
                   <ProductCard book={book} />
                 </Col>
               ))}

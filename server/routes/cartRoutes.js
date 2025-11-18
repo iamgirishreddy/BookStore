@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Cart = require('../models/Cart');
-const { protect } = require('../middleware/auth');
 
-// GET user cart
-router.get('/', protect, async (req, res) => {
+
+router.get('/', async (req, res) => {
   try {
-    let cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
+    let cart = await Cart.findOne().populate('items.product');
     
     if (!cart) {
-      cart = await Cart.create({ user: req.user._id, items: [] });
+      cart = await Cart.create({ items: [] });
     }
     
     res.json({ data: { cart } });
@@ -18,15 +17,15 @@ router.get('/', protect, async (req, res) => {
   }
 });
 
-// ADD item to cart
-router.post('/add', protect, async (req, res) => {
+
+router.post('/add', async (req, res) => {
   try {
     const { productId, quantity = 1 } = req.body;
     
-    let cart = await Cart.findOne({ user: req.user._id });
+    let cart = await Cart.findOne();
     
     if (!cart) {
-      cart = await Cart.create({ user: req.user._id, items: [] });
+      cart = await Cart.create({ items: [] });
     }
     
     const itemIndex = cart.items.findIndex(item => item.product.toString() === productId);
@@ -46,12 +45,12 @@ router.post('/add', protect, async (req, res) => {
   }
 });
 
-// UPDATE item quantity
-router.put('/update', protect, async (req, res) => {
+
+router.put('/update', async (req, res) => {
   try {
     const { productId, quantity } = req.body;
     
-    const cart = await Cart.findOne({ user: req.user._id });
+    const cart = await Cart.findOne();
     
     if (!cart) {
       return res.status(404).json({ message: 'Cart not found' });
@@ -76,10 +75,10 @@ router.put('/update', protect, async (req, res) => {
   }
 });
 
-// REMOVE item from cart
-router.delete('/remove/:productId', protect, async (req, res) => {
+
+router.delete('/remove/:productId', async (req, res) => {
   try {
-    const cart = await Cart.findOne({ user: req.user._id });
+    const cart = await Cart.findOne();
     
     if (!cart) {
       return res.status(404).json({ message: 'Cart not found' });
@@ -96,10 +95,10 @@ router.delete('/remove/:productId', protect, async (req, res) => {
   }
 });
 
-// CLEAR cart
-router.delete('/clear', protect, async (req, res) => {
+
+router.delete('/clear', async (req, res) => {
   try {
-    const cart = await Cart.findOne({ user: req.user._id });
+    const cart = await Cart.findOne();
     
     if (cart) {
       cart.items = [];

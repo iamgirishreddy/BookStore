@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const Wishlist = require('../models/Wishlist');
-const { protect } = require('../middleware/auth');
 
-// GET user wishlist
-router.get('/', protect, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    let wishlist = await Wishlist.findOne({ user: req.user._id }).populate('products');
+    let wishlist = await Wishlist.findOne().populate('products');
     
     if (!wishlist) {
-      wishlist = await Wishlist.create({ user: req.user._id, products: [] });
+      wishlist = await Wishlist.create({ products: [] });
     }
     
     res.json({ data: { wishlist } });
@@ -18,15 +16,15 @@ router.get('/', protect, async (req, res) => {
   }
 });
 
-// ADD to wishlist
-router.post('/add', protect, async (req, res) => {
+
+router.post('/add', async (req, res) => {
   try {
     const { productId } = req.body;
     
-    let wishlist = await Wishlist.findOne({ user: req.user._id });
+    let wishlist = await Wishlist.findOne();
     
     if (!wishlist) {
-      wishlist = await Wishlist.create({ user: req.user._id, products: [] });
+      wishlist = await Wishlist.create({ products: [] });
     }
     
     if (!wishlist.products.includes(productId)) {
@@ -42,10 +40,10 @@ router.post('/add', protect, async (req, res) => {
   }
 });
 
-// REMOVE from wishlist
-router.delete('/remove/:productId', protect, async (req, res) => {
+
+router.delete('/remove/:productId', async (req, res) => {
   try {
-    const wishlist = await Wishlist.findOne({ user: req.user._id });
+    const wishlist = await Wishlist.findOne();
     
     if (wishlist) {
       wishlist.products = wishlist.products.filter(id => id.toString() !== req.params.productId);
