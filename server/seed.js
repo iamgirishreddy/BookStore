@@ -12,7 +12,7 @@ const products = [
     category: "fiction",
     price: 399,
     originalPrice: 599,
-    rating: 4.5,
+    rating: 4.6,
     reviewCount: 1247,
     image: "https://books.google.com/books/content?id=besjEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
     description: "A classic American novel set in the summer of 1922, following the mysterious Jay Gatsby and his pursuit of the American Dream. The story explores themes of wealth, love, and the American Dream, set against the backdrop of the Roaring Twenties. Fitzgerald's lyrical prose and memorable characters make this a timeless tale of ambition and tragedy.",
