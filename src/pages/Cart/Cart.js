@@ -40,81 +40,80 @@ const Cart = () => {
           
           <Card>
             <ListGroup variant="flush">
-              {cartItems.map(item => (
-               <ListGroup.Item key={item.product._id} className="p-3">
-                  <Row className="align-items-center">
-                    <Col xs={3} md={2}>
-                      <div 
-                        style={{
-                          width: '80px',
-                          height: '100px',
-                          backgroundColor: '#f8f9fa',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          border: '1px solid #dee2e6',
-                          borderRadius: '4px'
-                        }}
-                      >
-                        <img 
-  src={item.product.image}
-  alt={item.product.title}
-  style={{
-    width: '80px',
-    height: '100px',
-    objectFit: 'cover',
-    borderRadius: '4px',
-    border: '1px solid #dee2e6'
-  }}
-/>
-                      </div>
-                    </Col>
-                    
-                    <Col xs={9} md={4}>
-                      <h6 className="mb-1">{item.product.title}</h6>
-                      <p className="text-muted small mb-1">by {item.product.author}</p>
-                      <p className="text-success mb-0">₹{item.product.price}</p>
-                    </Col>
-                    
-                    <Col xs={6} md={3}>
-                      <div className="d-flex align-items-center">
-                        <Button 
-                          variant="outline-secondary" 
-                          size="sm"
-                          onClick={() => updateQuantity(item.product._id, item.quantity - 1)}
-                          disabled={item.quantity <= 1}
-                        >
-                          -
-                        </Button>
-                        <span className="mx-3 fw-bold">{item.quantity}</span>
-                        <Button 
-                          variant="outline-secondary" 
-                          size="sm"
-                          onClick={() => updateQuantity(item.product._id, item.quantity + 1)}
-                        >
-                          +
-                        </Button>
-                      </div>
-                    </Col>
-                    
-                    <Col xs={6} md={2}>
-                      <p className="h6 text-success mb-0">
-                        ₹{item.product.price * item.quantity}
-                      </p>
-                    </Col>
-                    
-                    <Col xs={12} md={1} className="text-end">
-                      <Button 
-                        variant="outline-danger" 
-                        size="sm"
-                        onClick={() => removeFromCart(item.product._id)}
-                      >
-                        ✕
-                      </Button>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-              ))}
+              {cartItems.length > 0 ? (
+  cartItems.map((item, index) => {
+    // ✅ Skip broken/null product entries
+    if (!item.product) return null;
+
+    return (
+      <Card key={item.product._id || index} className="mb-3">
+        <Card.Body>
+          <Row className="align-items-center">
+
+            <Col xs={3} md={2}>
+              <img
+                src={item.product.image || 'placeholder-image-url'}
+                alt={item.product.title}
+                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+              />
+            </Col>
+
+            <Col xs={9} md={4}>
+              <h5>{item.product.title}</h5>
+              <p className="text-muted mb-0">{item.product.author}</p>
+            </Col>
+
+            <Col xs={6} md={2} className="text-center">
+              <p className="mb-0">₹{item.product.price}</p>
+            </Col>
+
+            <Col xs={6} md={2} className="text-center">
+              <div className="d-flex align-items-center justify-content-center gap-2">
+                <Button
+                  variant="outline-secondary"
+                  size="sm"
+                  onClick={() => updateQuantity(item.product._id, item.quantity - 1)}
+                  disabled={item.quantity <= 1}
+                >
+                  -
+                </Button>
+                <span>{item.quantity}</span>
+                <Button
+                  variant="outline-secondary"
+                  size="sm"
+                  onClick={() => updateQuantity(item.product._id, item.quantity + 1)}
+                >
+                  +
+                </Button>
+              </div>
+            </Col>
+
+            <Col xs={12} md={2} className="text-center mt-2 mt-md-0">
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={() => removeFromCart(item.product._id)}
+                className="w-100 w-md-auto"
+              >
+                Remove
+              </Button>
+            </Col>
+
+          </Row>
+        </Card.Body>
+      </Card>
+    );
+  })
+) : (
+  <div className="text-center py-5">
+    <h4>Your cart is empty</h4>
+    <p className="text-muted">Add some books to get started!</p>
+    <Button as={Link} to="/products" variant="primary">
+      Browse Books
+    </Button>
+  </div>
+)}
+
             </ListGroup>
           </Card>
         </Col>

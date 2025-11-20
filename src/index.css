@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Mobile button improvements */
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .btn-group {
+    flex-direction: column;
+  }
+  
+  .d-flex.gap-3 {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+}

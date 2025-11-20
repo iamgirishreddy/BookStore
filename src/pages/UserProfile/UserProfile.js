@@ -105,12 +105,12 @@ const UserProfile = () => {
                         <p className="text-muted small mb-1">Placed on {formatDate(order.createdAt)}</p>
                         <p className="small text-muted mb-0">
                          {order.items.length} item{order.items.length > 1 ? 's' : ''} • 
-  {order.items.map((item, index) => (
-    <span key={index}>
+      {order.items.map((item, index) => (
+      <span key={index}>
       {item.product?.title || 'Product'} (×{item.quantity})
       {index < order.items.length - 1 ? ', ' : ''}
-    </span>
-  ))}
+      </span>
+        ))}
                         </p>
                       </div>
                       <div className="text-end">
