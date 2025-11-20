@@ -172,13 +172,13 @@ if (loading) {
           
           <p className="lead mb-4">{book.description}</p>
           
-          <div className="d-flex flex-wrap gap-3 mb-4">
+          <div className="d-flex flex-column flex-sm-row flex-wrap gap-3 mb-4">
             <Button 
               variant="success" 
               size="lg"
               onClick={handleAddToCart}
               disabled={!book.inStock}
-              className="flex-grow-1"
+              className="w-100 w-sm-auto flex-sm-grow-1"
               style={{ minWidth: '200px' }}
             >
               {book.inStock ? (
@@ -192,6 +192,7 @@ if (loading) {
               variant={isInWishlist(productId) ? "danger" : "outline-danger"}
               size="lg"
               onClick={handleWishlistToggle}
+              className="w-100 w-sm-auto"
               style={{ minWidth: '150px' }}
             >
               {isInWishlist(productId) ? (
