@@ -2,7 +2,6 @@ import React,{ useState, useEffect } from 'react';
 import API from '../../api/axios';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-// import { books, categories } from '../../data/books';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { CATEGORY_IMAGES } from '../../utils/categoryImages';
 
@@ -50,7 +49,7 @@ const Home = () => {
   
   return (
     <div>
-      <div className="bg-primary text-white py-5 mb-4">
+      <div className="bg-dark text-white py-5 mb-4">
         <Container>
           <Row>
             <Col md={8} className="mx-auto text-center">
@@ -73,7 +72,7 @@ const Home = () => {
             <h2 className="text-center mb-4">Shop by Category</h2>
             <Row>
               {categories.map((category, index) => (
-  <Col md={3} sm={6} key={category.name || index} className="mb-3">
+        <Col md={3} sm={6} key={category.name || index} className="mb-3">
                   <Card className="h-100 shadow-sm category-card">
                     <div 
                       style={{
@@ -125,7 +124,7 @@ const Home = () => {
             <h2 className="text-center mb-4">Featured Books</h2>
             <Row>
              {featuredBooks.slice(0, 8).map((book, index) => (
-  <Col lg={3} md={6} key={book._id || index} className="mb-4">
+          <Col lg={3} md={6} key={book._id || index} className="mb-4">
                   <ProductCard book={book} />
                 </Col>
               ))}

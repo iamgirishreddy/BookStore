@@ -19,7 +19,7 @@ const NavigationBar = () => {
   };
   
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="mb-3">
+    <Navbar bg="dark" variant="dark" expand="lg" className="">
       <Container>
         <Navbar.Brand as={Link} to="/">
           📚 BookStore
