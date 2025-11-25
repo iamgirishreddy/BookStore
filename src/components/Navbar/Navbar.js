@@ -39,11 +39,11 @@ const NavigationBar = () => {
 
           </Nav>
           
-         <Form className="d-flex mt-2 mt-lg-0">
+         <Form className="d-flex flex-column flex-lg-row gap-2 mt-2 mt-lg-0 w-100 w-lg-auto">
   <FormControl
     type="search"
     placeholder="Search books..."
-    className="me-2"
+    className="w-100 w-lg-auto"
     aria-label="Search"
     value={searchQuery}
     onChange={(e) => setSearchQuery(e.target.value)}
@@ -54,12 +54,12 @@ const NavigationBar = () => {
 
           
           <Nav>
-            <Nav.Link as={Link} to="/wishlist" className="position-relative">
+            <Nav.Link as={Link} to="/wishlist" className="d-flex align-items-center gap-1">
               ❤️ Wishlist {wishlistItems.length > 0 && <Badge bg="danger" className="ms-1">{wishlistItems.length}</Badge>}
 
             </Nav.Link>
             
-            <Nav.Link as={Link} to="/cart" className="position-relative">
+            <Nav.Link as={Link} to="/cart" className="d-flex align-items-center gap-1">
              🛒 Cart {getTotalItems() > 0 && <Badge bg="danger" className="ms-1">{getTotalItems()}</Badge>}
 
             </Nav.Link>
