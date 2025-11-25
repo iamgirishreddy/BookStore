@@ -33,35 +33,26 @@ const Wishlist = () => {
       
       <Row>
         {wishlistItems.map(book => (
-          <Col lg={6} key={book._id} className="mb-3">
+          <Col xs={12} md={6}
+ key={book._id} className="mb-3">
             <Card>
               <Card.Body>
-                <Row className="align-items-center">
-                  <Col xs={3}>
-                    <div 
-                      style={{
-                        width: '80px',
-                        height: '100px',
-                        backgroundColor: '#f8f9fa',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        border: '1px solid #dee2e6'
-                      }}
-                    >
-                      <img 
-                        src={book.image} 
-                        alt={book.title} 
+                <Row className="align-items-center g-3">
 
-                        style={{ maxWidth: '100%', maxHeight: '100%' }} 
-                      />
-                    </div>
+                  <Col xs={3}>
+                    <img 
+  src={book.image}
+  alt={book.title}
+  className="img-fluid rounded border"
+/>
+
                   </Col>
                   <Col xs={9}>
                     <h6>{book.title}</h6>
                     <p className="text-muted small">by {book.author}</p>
                     <p className="text-success mb-2">₹{book.price}</p>
-                    <div className="d-flex gap-2">
+                   <div className="d-flex flex-wrap gap-2">
+
                       <Button 
                         variant="success" 
                         size="sm"

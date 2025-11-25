@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import {useOrder} from '../../context/OrderContext';
 
 const UserProfile = () => {
@@ -13,20 +13,37 @@ const UserProfile = () => {
   const [addresses , setAddresses] = useState([
     {
       id: 1,
-      name: "Home",
-      address: "123 MG Road, Bangalore, Karnataka 560001",
+      fullName: "Rahul Sharma",   
+      email: "rahul.sharma@email.com",
+      phone: "9876543210",
+      pincode: "560001",
+      address: "123 MG Road",
+      city: "Bangalore",
+      state: "Karnataka",
       isDefault: true
     },
     {
       id: 2,
-      name: "Office", 
-      address: "456 Tech Park, Whitefield, Bangalore 560066",
+      fullName: "Rahul Sharma",
+      email: "rahul.sharma@email.com",
+      phone: "9876543210",
+      pincode: "560066",
+      address: "456 Tech Park, Whitefield",
+      city: "Bangalore",
+      state: "Karnataka",
       isDefault: false
     }
   ]);
   const [showAddressModal, setShowAddressModal] = useState(false);
 const [editingAddress, setEditingAddress] = useState(null);
-const [newAddress, setNewAddress] = useState({ name: '', address: '', isDefault: false });
+const [newAddress, setNewAddress] = useState({ fullName: '',
+    email: '',
+    phone: '',
+    pincode: '',
+    address: '',
+    city: '',
+    state: '',
+    isDefault: false});
 
   
   
@@ -46,13 +63,24 @@ const [newAddress, setNewAddress] = useState({ name: '', address: '', isDefault:
   };
 
     const handleAddAddress = () => {
-  if (newAddress.name && newAddress.address) {
+  if (newAddress.fullName && newAddress.address)  {
     const newAddr = {
       id: Date.now(),
       ...newAddress
     };
+
     setAddresses([...addresses, newAddr]);
-    setNewAddress({ name: '', address: '', isDefault: false });
+
+    setNewAddress({
+        fullName: '',
+        email: '',
+        phone: '',
+        pincode: '',
+        address: '',
+        city: '',
+        state: '',
+        isDefault: false
+      });
     setShowAddressModal(false);
   }
 };
@@ -60,6 +88,7 @@ const [newAddress, setNewAddress] = useState({ name: '', address: '', isDefault:
 const handleEditAddress = (addr) => {
   setEditingAddress(addr);
   setNewAddress(addr);
+
   setShowAddressModal(true);
 };
 
@@ -68,7 +97,14 @@ const handleUpdateAddress = () => {
     addr.id === editingAddress.id ? { ...editingAddress, ...newAddress } : addr
   ));
   setEditingAddress(null);
-  setNewAddress({ name: '', address: '', isDefault: false });
+  setNewAddress({  fullName: '',
+      email: '',
+      phone: '',
+      pincode: '',
+      address: '',
+      city: '',
+      state: '',
+      isDefault: false });
   setShowAddressModal(false);
 };
 
@@ -119,7 +155,7 @@ const handleDeleteAddress = (id) => {
       <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start">
         <div className="mb-2 mb-sm-0">
           <h6 className="mb-1">
-            {addr.name} 
+            {addr.fullName} 
             {addr.isDefault && <span className="badge bg-primary ms-2">Default</span>}
           </h6>
           <p className="text-muted mb-0">{addr.address}</p>
@@ -196,20 +232,68 @@ const handleDeleteAddress = (id) => {
                 {editingAddress ? "Edit Address" : "Add New Address"}
               </h5>
 
-              <input 
-                className="form-control my-2"
-                placeholder="Name (Home, Office...)"
-                value={newAddress.name}
-                onChange={(e) => setNewAddress({ ...newAddress, name: e.target.value })}
-              />
+              <Form>
+  <Form.Group className="mb-2">
+    <Form.Label>Full Name</Form.Label>
+    <Form.Control
+      value={newAddress.fullName || ""}
+      onChange={e => setNewAddress({ ...newAddress, fullName: e.target.value })}
+      placeholder="Enter full name"
+    />
+  </Form.Group>
+  <Form.Group className="mb-2">
+    <Form.Label>Email</Form.Label>
+    <Form.Control
+      type="email"
+      value={newAddress.email || ""}
+      onChange={e => setNewAddress({ ...newAddress, email: e.target.value })}
+      placeholder="user@mail.com"
+    />
+  </Form.Group>
+  <Form.Group className="mb-2">
+    <Form.Label>Phone</Form.Label>
+    <Form.Control
+      value={newAddress.phone || ""}
+      onChange={e => setNewAddress({ ...newAddress, phone: e.target.value })}
+      placeholder="Enter phone"
+    />
+  </Form.Group>
+  <Form.Group className="mb-2">
+    <Form.Label>Pincode</Form.Label>
+    <Form.Control
+      value={newAddress.pincode || ""}
+      onChange={e => setNewAddress({ ...newAddress, pincode: e.target.value })}
+      placeholder="Enter pincode"
+    />
+  </Form.Group>
+  <Form.Group className="mb-2">
+    <Form.Label>Address</Form.Label>
+    <Form.Control
+      as="textarea"
+      rows={2}
+      value={newAddress.address || ""}
+      onChange={e => setNewAddress({ ...newAddress, address: e.target.value })}
+      placeholder="Street Address"
+    />
+  </Form.Group>
+  <Form.Group className="mb-2">
+    <Form.Label>City</Form.Label>
+    <Form.Control
+      value={newAddress.city || ""}
+      onChange={e => setNewAddress({ ...newAddress, city: e.target.value })}
+      placeholder="City"
+    />
+  </Form.Group>
+  <Form.Group className="mb-2">
+    <Form.Label>State</Form.Label>
+    <Form.Control
+      value={newAddress.state || ""}
+      onChange={e => setNewAddress({ ...newAddress, state: e.target.value })}
+      placeholder="State"
+    />
+  </Form.Group>
+</Form>
 
-              <textarea 
-                className="form-control my-2"
-                placeholder="Enter full address"
-                rows={3}
-                value={newAddress.address}
-                onChange={(e) => setNewAddress({ ...newAddress, address: e.target.value })}
-              />
 
             
               <div className="form-check my-2">
@@ -223,7 +307,16 @@ const handleDeleteAddress = (id) => {
                   onClick={() => {
                     setShowAddressModal(false);
                     setEditingAddress(null);
-                    setNewAddress({ name: '', address: '', isDefault: false });
+                    setNewAddress({
+                      fullName: '',
+                      email: '',
+                      phone: '',
+                      pincode: '',
+                      address: '',
+                      city: '',
+                      state: '',
+                      isDefault: false
+                    });
                   }}
                 >
                   Cancel

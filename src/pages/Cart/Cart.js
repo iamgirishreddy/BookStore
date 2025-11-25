@@ -1,9 +1,24 @@
 import React from 'react';
-import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Card, Button, ListGroup, Alert } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 
+
+import {useAddress} from '../../context/AddressContext';
+
+
+
+
+
+
 const Cart = () => {
+
+   const navigate = useNavigate();
+  const [selectedAddress, setSelectedAddress] = React.useState(null);
+const [showAddressModal, setShowAddressModal] = React.useState(false);
+
+ const [alertMsg, setAlertMsg] = React.useState("");
+const { addresses } = useAddress();
   const { 
     cartItems, 
     removeFromCart, 
@@ -37,16 +52,22 @@ const Cart = () => {
               Clear Cart
             </Button>
           </div>
+
+               {alertMsg && (
+            <Alert variant="warning" className="py-2"> 
+              {alertMsg}
+            </Alert>
+          )}
           
           <Card>
             <ListGroup variant="flush">
               {cartItems.length > 0 ? (
-  cartItems.map((item, index) => {
-    // ✅ Skip broken/null product entries
-    if (!item.product) return null;
+      cartItems.map((item, index) => {
+  
+     if (!item.product) return null;
 
-    return (
-      <Card key={item.product._id || index} className="mb-3">
+     return (
+      <ListGroup.Item key={item.product._id || index} className="mb-3">
         <Card.Body>
           <Row className="align-items-center">
 
@@ -101,17 +122,17 @@ const Cart = () => {
 
           </Row>
         </Card.Body>
-      </Card>
-    );
-  })
-) : (
-  <div className="text-center py-5">
+      </ListGroup.Item>
+       );
+         })
+          ) : (
+        <div className="text-center py-5">
     <h4>Your cart is empty</h4>
     <p className="text-muted">Add some books to get started!</p>
     <Button as={Link} to="/products" variant="primary">
       Browse Books
     </Button>
-  </div>
+        </div>
 )}
 
             </ListGroup>
@@ -121,6 +142,30 @@ const Cart = () => {
         <Col lg={4}>
         
             <Card className="sticky-top" style={{ top: '80px', zIndex: 1010 }}>
+
+  <Card className="mb-4">
+  <Card.Header>
+    <h5 className="mb-0">Delivery Address</h5>
+  </Card.Header>
+  <Card.Body>
+    {selectedAddress ? (
+      <>
+        <div className="mb-2">
+          <strong>{selectedAddress.fullName}</strong><br />
+          <span>{selectedAddress.address}</span>
+          {selectedAddress.isDefault && <span className="badge bg-primary ms-2">Default</span>}
+        </div>
+        <Button variant="outline-secondary" size="sm" onClick={() => setShowAddressModal(true)}>
+          Change Address
+        </Button>
+      </>
+    ) : (
+      <Button variant="outline-primary" size="sm" onClick={() => setShowAddressModal(true)}>
+        Add Address
+      </Button>
+    )}
+  </Card.Body>
+</Card>
 
             <Card.Header>
               <h5 className="mb-0">Order Summary</h5>
@@ -142,7 +187,14 @@ const Cart = () => {
             </Card.Body>
             <Card.Footer>
               <div className="d-grid">
-                <Button variant="success" size="lg" as={Link} to="/checkout">
+                <Button variant="success" size="lg" onClick={() => {
+                    if (!selectedAddress) {
+                      setAlertMsg("Select a delivery address before checkout!");
+                      return;
+                    }
+                    navigate('/checkout', { state: { selectedAddress } });
+                  }}
+                >
                   Proceed to Checkout
                 </Button>
               </div>
@@ -150,7 +202,70 @@ const Cart = () => {
           </Card>
         </Col>
       </Row>
+
+      {showAddressModal && (
+        <div
+          className="modal-backdrop"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(20,20,20,0.75)', // 🔧 CHANGE
+            zIndex: 1050
+          }}
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div
+              className="modal-content p-3"
+              style={{ background: 'white', borderRadius: 8, minWidth: 320 }} // 🔧 CHANGE
+            >
+              <h5 className="mb-3">Select Delivery Address</h5>
+
+              {addresses.length === 0 ? (
+                <p>No addresses saved yet.</p>
+              ) : (
+                addresses.map(addr => (
+                  <div
+                    key={addr.id}
+                    className="border rounded p-2 my-2 d-flex justify-content-between align-items-center"
+                  >
+                    <div>
+                      <strong>{addr.fullName || addr.name}</strong><br />
+                      <span>{addr.address}</span>
+                      {addr.isDefault && <span className="badge bg-primary ms-2">Default</span>}
+                    </div>
+
+                    {/* 🔧 CHANGE: Proper select button */}
+                    <Button
+                      variant="success"
+                      size="sm"
+                      onClick={() => {
+                        setSelectedAddress(addr);
+                        setShowAddressModal(false);
+                        setAlertMsg(""); // remove alert when selected
+                      }}
+                    >
+                      Deliver Here
+                    </Button>
+                  </div>
+                ))
+              )}
+
+              <div className="d-flex justify-content-end gap-2 mt-2">
+                <Button variant="secondary" onClick={() => setShowAddressModal(false)}>
+                  Cancel
+                </Button>
+                <Button as={Link} to="/profile" variant="outline-primary">
+                  Add/Edit Addresses
+                </Button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
     </Container>
+    
+
   );
 };
 
