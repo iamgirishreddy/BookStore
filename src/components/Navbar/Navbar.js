@@ -30,16 +30,12 @@ const NavigationBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            {/* <Nav.Link as={Link} to="/products">All Books</Nav.Link>
-            <Nav.Link as={Link} to="/products/fiction">Fiction</Nav.Link>
-            <Nav.Link as={Link} to="/products/mythology">Mythology</Nav.Link>
-            <Nav.Link as={Link} to="/products/biography">Biography</Nav.Link>
-             */}
+          
              <Nav.Link as={Link} to="/products">Products</Nav.Link>
 
           </Nav>
           
-         <Form className="d-flex flex-column flex-lg-row gap-2 mt-2 mt-lg-0 w-100 w-lg-auto">
+         <Form className="d-flex flex-column flex-lg-row gap-2 mt-2 mt-lg-0 w-100 w-lg-auto" onSubmit={handleSearch} >
   <FormControl
     type="search"
     placeholder="Search books..."
@@ -47,7 +43,8 @@ const NavigationBar = () => {
     aria-label="Search"
     value={searchQuery}
     onChange={(e) => setSearchQuery(e.target.value)}
-    onKeyPress={handleSearch}
+    
+  
   />
   <Button variant="outline-light" onClick={handleSearch}>Search</Button>
 </Form>
