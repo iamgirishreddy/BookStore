@@ -69,13 +69,13 @@ const { addresses } = useAddress();
      return (
       <ListGroup.Item key={item.product._id || index} className="mb-3">
         <Card.Body>
-          <Row className="align-items-center">
+          <Row className="align-items-center g-3">
 
             <Col xs={3} md={2}>
               <img
                 src={item.product.image || 'placeholder-image-url'}
                 alt={item.product.title}
-                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                className="img-fluid rounded"
               />
             </Col>
 
@@ -89,7 +89,7 @@ const { addresses } = useAddress();
             </Col>
 
             <Col xs={6} md={2} className="text-center">
-              <div className="d-flex align-items-center justify-content-center gap-2">
+              <div className="d-flex flex-wrap align-items-center justify-content-center gap-2">
                 <Button
                   variant="outline-secondary"
                   size="sm"
@@ -139,12 +139,12 @@ const { addresses } = useAddress();
           </Card>
         </Col>
         
-        <Col lg={4}>
+        <Col xs={12} lg={4} className="mt-4 mt-lg-0">
         
             <Card className="sticky-top" style={{ top: '80px', zIndex: 1010 }}>
 
   <Card className="mb-4">
-  <Card.Header>
+  <Card.Header className="d-flex justify-content-between align-items-center">
     <h5 className="mb-0">Delivery Address</h5>
   </Card.Header>
   <Card.Body>
@@ -167,7 +167,7 @@ const { addresses } = useAddress();
   </Card.Body>
 </Card>
 
-            <Card.Header>
+            <Card.Header className="d-flex justify-content-between align-items-center">
               <h5 className="mb-0">Order Summary</h5>
             </Card.Header>
             <Card.Body>
@@ -213,7 +213,7 @@ const { addresses } = useAddress();
             zIndex: 1050
           }}
         >
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-dialog modal-dialog-centered w-100">
             <div
               className="modal-content p-3"
               style={{ background: 'white', borderRadius: 8, minWidth: 320 }} // 🔧 CHANGE
