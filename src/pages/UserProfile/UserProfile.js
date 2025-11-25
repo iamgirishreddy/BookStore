@@ -222,116 +222,122 @@ const handleDeleteAddress = (id) => {
         </Col>
       </Row>
      {showAddressModal && (
-        <div 
-          className="modal-backdrop" 
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1050 }}
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content p-3">
-              <h5 className="mb-3">
-                {editingAddress ? "Edit Address" : "Add New Address"}
-              </h5>
-
-              <Form>
-  <Form.Group className="mb-2">
-    <Form.Label>Full Name</Form.Label>
-    <Form.Control
-      value={newAddress.fullName || ""}
-      onChange={e => setNewAddress({ ...newAddress, fullName: e.target.value })}
-      placeholder="Enter full name"
-    />
-  </Form.Group>
-  <Form.Group className="mb-2">
-    <Form.Label>Email</Form.Label>
-    <Form.Control
-      type="email"
-      value={newAddress.email || ""}
-      onChange={e => setNewAddress({ ...newAddress, email: e.target.value })}
-      placeholder="user@mail.com"
-    />
-  </Form.Group>
-  <Form.Group className="mb-2">
-    <Form.Label>Phone</Form.Label>
-    <Form.Control
-      value={newAddress.phone || ""}
-      onChange={e => setNewAddress({ ...newAddress, phone: e.target.value })}
-      placeholder="Enter phone"
-    />
-  </Form.Group>
-  <Form.Group className="mb-2">
-    <Form.Label>Pincode</Form.Label>
-    <Form.Control
-      value={newAddress.pincode || ""}
-      onChange={e => setNewAddress({ ...newAddress, pincode: e.target.value })}
-      placeholder="Enter pincode"
-    />
-  </Form.Group>
-  <Form.Group className="mb-2">
-    <Form.Label>Address</Form.Label>
-    <Form.Control
-      as="textarea"
-      rows={2}
-      value={newAddress.address || ""}
-      onChange={e => setNewAddress({ ...newAddress, address: e.target.value })}
-      placeholder="Street Address"
-    />
-  </Form.Group>
-  <Form.Group className="mb-2">
-    <Form.Label>City</Form.Label>
-    <Form.Control
-      value={newAddress.city || ""}
-      onChange={e => setNewAddress({ ...newAddress, city: e.target.value })}
-      placeholder="City"
-    />
-  </Form.Group>
-  <Form.Group className="mb-2">
-    <Form.Label>State</Form.Label>
-    <Form.Control
-      value={newAddress.state || ""}
-      onChange={e => setNewAddress({ ...newAddress, state: e.target.value })}
-      placeholder="State"
-    />
-  </Form.Group>
-</Form>
-
-
-            
-              <div className="form-check my-2">
-                
-                
-                    </div>
-
-                    <div className="d-flex justify-content-end gap-2 mt-3">
-                <Button 
-                  variant="secondary" 
-                  onClick={() => {
-                    setShowAddressModal(false);
-                    setEditingAddress(null);
-                    setNewAddress({
-                      fullName: '',
-                      email: '',
-                      phone: '',
-                      pincode: '',
-                      address: '',
-                      city: '',
-                      state: '',
-                      isDefault: false
-                    });
-                  }}
-                >
-                  Cancel
-                </Button>
-                <Button 
-                  variant="primary" 
-                  onClick={editingAddress ? handleUpdateAddress : handleAddAddress}
-                >
-                  {editingAddress ? "Update" : "Add"}
-                </Button>
-              </div>
-            </div>
-          </div>
+  <div
+    className="modal show fade"
+    style={{ display: "block", background: "rgba(0,0,0,0.6)" }}
+    tabIndex="-1"
+  >
+    <div className="modal-dialog modal-dialog-centered modal-lg" style={{ maxWidth: "600px" }}>
+      <div className="modal-content">
+        
+        <div className="modal-header">
+          <h5 className="modal-title">
+            {editingAddress ? "Edit Address" : "Add New Address"}
+          </h5>
+          <Button
+            variant="close"
+            onClick={() => {
+              setShowAddressModal(false);
+              setEditingAddress(null);
+            }}
+          />
         </div>
-      )}
+
+        <div className="modal-body">
+
+          <Form>
+            <Form.Group className="mb-2">
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control
+                value={newAddress.fullName}
+                onChange={e => setNewAddress({ ...newAddress, fullName: e.target.value })}
+                placeholder="Enter full name"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-2">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                value={newAddress.email}
+                onChange={e => setNewAddress({ ...newAddress, email: e.target.value })}
+                placeholder="user@mail.com"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-2">
+              <Form.Label>Phone</Form.Label>
+              <Form.Control
+                value={newAddress.phone}
+                onChange={e => setNewAddress({ ...newAddress, phone: e.target.value })}
+                placeholder="Enter phone"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-2">
+              <Form.Label>Pincode</Form.Label>
+              <Form.Control
+                value={newAddress.pincode}
+                onChange={e => setNewAddress({ ...newAddress, pincode: e.target.value })}
+                placeholder="Enter pincode"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-2">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={2}
+                value={newAddress.address}
+                onChange={e => setNewAddress({ ...newAddress, address: e.target.value })}
+                placeholder="Street Address"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-2">
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                value={newAddress.city}
+                onChange={e => setNewAddress({ ...newAddress, city: e.target.value })}
+                placeholder="City"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-2">
+              <Form.Label>State</Form.Label>
+              <Form.Control
+                value={newAddress.state}
+                onChange={e => setNewAddress({ ...newAddress, state: e.target.value })}
+                placeholder="State"
+              />
+            </Form.Group>
+          </Form>
+
+        </div>
+
+        <div className="modal-footer">
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowAddressModal(false);
+              setEditingAddress(null);
+            }}
+          >
+            Cancel
+          </Button>
+
+          <Button
+            variant="primary"
+            onClick={editingAddress ? handleUpdateAddress : handleAddAddress}
+          >
+            {editingAddress ? "Update" : "Add"}
+          </Button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+)}
 
     </Container>
   );
