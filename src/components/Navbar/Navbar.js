@@ -50,19 +50,24 @@ const NavigationBar = () => {
 </Form>
 
           
-          <Nav>
-            <Nav.Link as={Link} to="/wishlist" className="d-flex align-items-center gap-1">
-              ❤️ Wishlist {wishlistItems.length > 0 && <Badge bg="danger" className="ms-1">{wishlistItems.length}</Badge>}
-
+          <Nav className="d-flex align-items-center">
+            <Nav.Link as={Link} to="/wishlist">
+            <span className="d-flex align-items-center gap-1">
+              ❤️ <span> Wishlist </span>  {wishlistItems.length > 0 && (<Badge bg="danger" className="ms-1">{wishlistItems.length}</Badge>)}
+              </span>
             </Nav.Link>
             
-            <Nav.Link as={Link} to="/cart" className="d-flex align-items-center gap-1">
-             🛒 Cart {getTotalItems() > 0 && <Badge bg="danger" className="ms-1">{getTotalItems()}</Badge>}
+            <Nav.Link as={Link} to="/cart">
+            <span className="d-flex align-items-center gap-1">
+             🛒 <span> Cart </span>  {getTotalItems() > 0 && (<Badge bg="danger" className="ms-1">{getTotalItems()}</Badge>)}
+             </span>
 
             </Nav.Link>
             
             <Nav.Link as={Link} to="/profile">
-              👤 Profile
+             <span className="d-flex align-items-center gap-1">
+              👤 <span>Profile</span>
+              </span>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
