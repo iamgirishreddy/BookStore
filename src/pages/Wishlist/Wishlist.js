@@ -39,11 +39,17 @@ const Wishlist = () => {
               <Card.Body>
                 <Row className="align-items-center g-3">
 
-                  <Col xs={3}>
+                  <Col xs={4} sm={3} md={3} lg={3}>
                     <img 
   src={book.image}
   alt={book.title}
   className="img-fluid rounded border"
+  style={{width: "100%",
+    maxWidth: "90px", 
+    height: "130px",
+    objectFit: "cover",
+    objectPosition: "top"}}
+
 />
 
                   </Col>
